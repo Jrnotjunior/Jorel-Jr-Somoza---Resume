@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jorel Jr. R. Somoza — NOC Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B1220;
+    --panel: #121B2E;
+    --border: #1C2942;
+    --text: #E7ECF5;
+    --muted: #8A96AC;
+    --accent-green: #4ADE80;
+    --accent-blue: #38BDF8;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  :root[data-theme="light"] {
+    --bg: #F7F8FB;
+    --panel: #FFFFFF;
+    --border: #E1E5EE;
+    --text: #16202F;
+    --muted: #5B6577;
+    --accent-green: #1B9C5A;
+    --accent-blue: #0B77C2;
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    scroll-padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent-blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-blue); outline-offset: 3px; }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  nav.tabs {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  nav.tabs .wrap {
+    display: flex;
+    gap: 4px;
+    padding-left: 28px;
+    padding-right: 28px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  nav.tabs .wrap::-webkit-scrollbar { display: none; }
+
+  nav.tabs a {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--muted);
+    padding: 16px 14px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+  }
+
+  nav.tabs a:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  nav.tabs a.active {
+    color: var(--text);
+    border-bottom-color: var(--accent-blue);
+  }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 56px 0 8px;
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--accent-green);
+    letter-spacing: 0.02em;
+    margin-bottom: 28px;
+  }
+
+  .status .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent-green);
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.55);
+    animation: pulse 2.4s ease-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .status .dot { animation: none; }
+  }
+
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.45); }
+    70%  { box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(32px, 6vw, 46px);
+    line-height: 1.12;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .role {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--muted);
+    margin: 0 0 22px;
+  }
+
+  .summary {
+    max-width: 58ch;
+    font-size: 16px;
+    color: var(--text);
+    margin: 0 0 28px;
+  }
+
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .contact-row a { color: var(--muted); }
+  .contact-row a:hover { color: var(--accent-blue); }
+
+  /* ---------- Sections ---------- */
+  section { padding: 48px 0; border-bottom: 1px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+    margin: 0 0 28px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  h2::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ---------- Timeline ---------- */
+  .timeline { position: relative; }
+
+  .entry {
+    position: relative;
+    padding-left: 26px;
+    padding-bottom: 40px;
+  }
+
+  .entry:last-child { padding-bottom: 0; }
+
+  .entry::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+  }
+
+  .entry::after {
+    content: "";
+    position: absolute;
+    left: 7.5px;
+    top: 18px;
+    bottom: -8px;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .entry:last-child::after { display: none; }
+
+  .entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin-bottom: 4px;
+  }
+
+  .org {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 17px;
+  }
+
+  .dates {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .title-line {
+    font-size: 14.5px;
+    color: var(--accent-blue);
+    margin: 0 0 14px;
+  }
+
+  ul.results {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  ul.results li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: var(--text);
+  }
+
+  ul.results li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-size: 13px;
+    top: 2px;
+  }
+
+  ul.results li:last-child { margin-bottom: 0; }
+
+  /* ---------- Skills ---------- */
+  .skill-row {
+    display: grid;
+    grid-template-columns: 168px 1fr;
+    gap: 6px 20px;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .skill-row:first-of-type { border-top: none; padding-top: 0; }
+
+  .skill-label {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--muted);
+    padding-top: 2px;
+  }
+
+  .skill-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    font-size: 14.5px;
+  }
+
+  .skill-values span {
+    color: var(--text);
+  }
+
+  .skill-values span:not(:last-child)::after {
+    content: "·";
+    margin-left: 10px;
+    color: var(--border);
+  }
+
+  @media (max-width: 520px) {
+    .skill-row { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  /* ---------- Education / misc grid ---------- */
+  .fact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  @media (max-width: 560px) {
+    .fact-grid { grid-template-columns: 1fr; }
+  }
+
+  .fact h3 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+
+  .fact p {
+    margin: 0;
+    font-size: 14.5px;
+    color: var(--muted);
+  }
+
+  .fact .dates {
+    display: block;
+    margin-top: 6px;
+  }
+
+  .empty-state {
+    padding: 20px 22px;
+    border: 1px dashed var(--border);
+    border-radius: 3px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .empty-state strong {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 44px 0 80px;
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--accent-blue); }
+</style>
+</head>
+<body>
+
+<nav class="tabs">
+  <div class="wrap">
+    <a href="#about" data-target="about" class="active">ABOUT</a>
+    <a href="#experience" data-target="experience">EXPERIENCE</a>
+    <a href="#projects" data-target="projects">PROJECTS</a>
+    <a href="#certifications" data-target="certifications">CERTIFICATIONS</a>
+    <a href="#skills" data-target="skills">SKILLS</a>
+    <a href="#education" data-target="education">EDUCATION</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section id="about" class="panel active">
+    <div class="hero">
+      <div class="status"><span class="dot"></span>AVAILABLE FOR OPPORTUNITIES — NCR / REMOTE</div>
+      <h1>Jorel Jr. R. Somoza</h1>
+      <p class="role">NOC Engineer / Network Engineer</p>
+      <p class="summary">Hands-on experience providing 24/7 network monitoring and support across rotating shifts for enterprise SD-WAN and network infrastructure spanning 1,000+ sites. Comfortable configuring, troubleshooting, and onboarding network appliances, with working knowledge of VPN, wireless, load balancing, and cloud networking.</p>
+      <div class="contact-row">
+        <a href="mailto:somozajoreljr@gmail.com">somozajoreljr@gmail.com</a>
+        <span>09458144790</span>
+        <span>Valenzuela City, Philippines</span>
+        <a href="https://www.linkedin.com/in/jorel-jr-somoza-a982463a8/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="panel">
+    <h2>Experience</h2>
+    <div class="timeline">
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="org">Accenture Inc.</span>
+          <span class="dates">JUN 2025 — PRESENT</span>
+        </div>
+        <p class="title-line">NOC Engineer / Network Engineer — Multinational Client Account (Confidential)</p>
+        <ul class="results">
+          <li>Maintained continuous network uptime across 1,000+ sites by delivering 24/7 NOC coverage through rotating shifts, minimizing service disruption for a multinational client.</li>
+          <li>Proactively identified and resolved network issues before they escalated, using Riverbed, Versa SD-WAN, and SolarWinds to monitor infrastructure health in real time.</li>
+          <li>Ensured secure and reliable connectivity across client sites by configuring and maintaining SD-WAN appliances with minimal downtime during deployment.</li>
+          <li>Reduced potential downtime by diagnosing root causes of network incidents quickly and coordinating effective resolutions.</li>
+          <li>Onboarded new network appliances into production with a smooth handover to monitoring, avoiding post-deployment issues.</li>
+          <li>Maintained SLA compliance by consistently logging, tracking, and resolving incidents and service requests through ServiceNow.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="org">Concentrix Eastwood</span>
+          <span class="dates">ON-THE-JOB TRAINING</span>
+        </div>
+        <p class="title-line">Tech Support Engineer (OJT)</p>
+        <ul class="results">
+          <li>Provided technical support to customers, diagnosing and resolving hardware, software, and connectivity issues.</li>
+          <li>Documented support interactions and escalated complex issues to appropriate teams for resolution.</li>
+          <li>Gained foundational experience in troubleshooting methodology and customer-facing technical communication.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="projects" class="panel">
+    <h2>Projects</h2>
+    <div class="empty-state">
+      <strong>Nothing posted yet</strong>
+      Lab work, CCNA practice builds, and network diagrams will show up here once added.
+    </div>
+  </section>
+
+  <section id="certifications" class="panel">
+    <h2>Certifications</h2>
+    <div class="empty-state">
+      <strong>CCNA — in progress</strong>
+      Currently completing CCNA training (Cisco Networking Fundamentals). This section will be updated with the official certification once the exam is passed.
+    </div>
+  </section>
+
+  <section id="skills" class="panel">
+    <h2>Skills</h2>
+    <div class="skill-row">
+      <span class="skill-label">SD-WAN / NETWORKING</span>
+      <span class="skill-values"><span>Versa SD-WAN</span><span>Riverbed</span><span>Extreme Networks Access Points</span></span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-label">SECURITY / REMOTE ACCESS</span>
+      <span class="skill-values"><span>Ivanti VPN</span><span>F5 BIG-IP (Load Balancing)</span></span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-label">CLOUD</span>
+      <span class="skill-values"><span>Azure Cloud Networking</span></span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-label">MONITORING</span>
+      <span class="skill-values"><span>SolarWinds</span></span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-label">TICKETING / ITSM</span>
+      <span class="skill-values"><span>ServiceNow</span></span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-label">CORE COMPETENCIES</span>
+      <span class="skill-values"><span>Network Monitoring</span><span>Troubleshooting</span><span>Appliance Configuration &amp; Onboarding</span><span>Incident Management</span></span>
+    </div>
+  </section>
+
+  <section id="education" class="panel">
+    <h2>Education &amp; background</h2>
+    <div class="fact-grid">
+      <div class="fact">
+        <h3>Bachelor of Science in Information Technology</h3>
+        <p>Pamantasan ng Lungsod ng Valenzuela</p>
+        <span class="dates">2021 — 2025</span>
+      </div>
+      <div class="fact">
+        <h3>Languages</h3>
+        <p>English — Proficient · Filipino — Proficient</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Jorel Jr. R. Somoza</span>
+    <a href="https://www.linkedin.com/in/jorel-jr-somoza-a982463a8/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:somozajoreljr@gmail.com">somozajoreljr@gmail.com</a>
+  </footer>
+
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('nav.tabs a');
+  const panels = document.querySelectorAll('.panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = tab.getAttribute('data-target');
+
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      panels.forEach(p => p.classList.toggle('active', p.id === target));
+
+      history.replaceState(null, '', '#' + target);
+    });
+  });
+
+  // Support direct links like page.html#skills
+  const initial = window.location.hash.replace('#', '');
+  if (initial) {
+    const match = document.querySelector('nav.tabs a[data-target="' + initial + '"]');
+    if (match) match.click();
+  }
+</script>
+
+</body>
+</html>
