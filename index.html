@@ -8,55 +8,179 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .lightbox { position: fixed !important; inset: 0 !important; }
-    .network-art {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background: #07101d url("network-background.svg") center / cover no-repeat;
-      opacity: 0.34;
-      animation: networkArtDrift 22s ease-in-out infinite alternate;
-    }
-    @keyframes networkArtDrift {
-      from { transform: scale(1); }
-      to { transform: scale(1.045); }
-    }
-    nav.tabs, .wrap, footer { position: relative; z-index: 2; }
-    .network-canvas, .network-vignette { z-index: 1 !important; }
-    .lightbox { z-index: 100 !important; }
+<link rel="stylesheet" href="style.css">
+<style>
+  .lightbox { position: fixed !important; inset: 0 !important; }
+  .network-art {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: #07101d url("network-background.svg") center / cover no-repeat;
+    opacity: 0.34;
+    animation: networkArtDrift 22s ease-in-out infinite alternate;
+  }
+  @keyframes networkArtDrift {
+    from { transform: scale(1); }
+    to { transform: scale(1.045); }
+  }
+  nav.tabs, .wrap, footer { position: relative; z-index: 2; }
+  .network-canvas, .network-vignette { z-index: 1 !important; }
+  .lightbox { z-index: 100 !important; }
 
-    /* Centered footer with the resume logo */
-    footer {
-      justify-content: center !important;
-      align-items: center;
-      text-align: center;
-    }
-    footer > div {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .footer-logo {
-      width: 28px;
-      height: 28px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      vertical-align: middle;
-    }
+  footer {
+    justify-content: center !important;
+    align-items: center;
+    text-align: center;
+  }
+  footer > div {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .footer-logo {
+    width: 28px;
+    height: 28px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    vertical-align: middle;
+  }
 
-    @media (max-width: 700px) {
-      .network-art { opacity: 0.20; animation-duration: 28s; }
-      footer { justify-content: center !important; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .network-art { animation: none; }
-    }
-  </style>
+  /* ---------- Portfolio improvements ---------- */
+  .hero-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 22px 0 4px;
+  }
+
+  .hero-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: rgba(18, 27, 46, 0.72);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .hero-action:hover {
+    color: var(--accent-blue);
+    border-color: var(--accent-blue);
+    text-decoration: none;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+    padding: 22px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(18, 27, 46, 0.72);
+  }
+
+  .project-kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--accent-green);
+    margin-bottom: 10px;
+  }
+
+  .project-card h3 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    margin: 0 0 8px;
+  }
+
+  .project-card p {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 16px;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+    margin-bottom: 18px;
+  }
+
+  .project-tech span {
+    padding: 4px 8px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+  }
+
+  .project-link {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-blue);
+  }
+
+  .cert-card {
+    padding: 20px 22px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(18, 27, 46, 0.72);
+  }
+
+  .cert-card + .cert-card { margin-top: 12px; }
+
+  .cert-card h3 {
+    font-family: var(--font-display);
+    font-size: 17px;
+    margin: 0 0 4px;
+  }
+
+  .cert-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  @media (max-width: 700px) {
+    .network-art { opacity: 0.20; animation-duration: 28s; }
+    footer { justify-content: center !important; }
+  }
+
+  @media (max-width: 620px) {
+    .project-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .network-art { animation: none; }
+  }
+
+  @media print {
+    body { background: #fff !important; color: #111 !important; }
+    .network-art, .network-canvas, .network-vignette, nav.tabs, .lightbox, .hero-actions { display: none !important; }
+    .wrap { max-width: 900px; padding: 0 24px; }
+    .panel { display: block !important; page-break-inside: avoid; }
+    .project-card, .cert-card { background: #fff !important; }
+    footer { padding-bottom: 20px; }
+  }
+</style>
 </head>
 <body>
 
@@ -91,6 +215,10 @@
         <span class="icon-link"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>Valenzuela City, Philippines</span>
       </div>
       <p class="languages">English — Proficient &middot; Filipino — Proficient</p>
+      <div class="hero-actions">
+        <a class="hero-action" href="https://github.com/Jrnotjunior" target="_blank" rel="noopener">GITHUB ↗</a>
+        <button class="hero-action" type="button" onclick="window.print()">PRINT / SAVE PDF</button>
+      </div>
     </div>
   </section>
 
@@ -129,22 +257,56 @@
 
   <section id="projects" class="panel">
     <h2>Projects</h2>
-    <div class="empty-state"><strong>Nothing posted yet</strong>Lab work, CCNA practice builds, and network diagrams will show up here once added.</div>
+    <div class="project-grid">
+      <article class="project-card">
+        <div class="project-kicker">FEATURED PROJECT</div>
+        <h3>DATIHAN.PH</h3>
+        <p>Responsive online thrift shop platform with product management, promotions, checkout, saved addresses, shipping calculations, and a mobile-first shopping experience.</p>
+        <div class="project-tech">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>JavaScript</span>
+          <span>Supabase</span>
+          <span>GitHub Pages</span>
+        </div>
+        <a class="project-link" href="https://jrnotjunior.github.io/datihan.ph/" target="_blank" rel="noopener">VIEW LIVE PROJECT ↗</a>
+      </article>
+
+      <article class="project-card">
+        <div class="project-kicker">PORTFOLIO</div>
+        <h3>Network Engineer Resume</h3>
+        <p>Interactive resume website built around a network-operations visual theme, with responsive navigation, animated topology background, photo lightbox, and print-friendly resume output.</p>
+        <div class="project-tech">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>JavaScript</span>
+          <span>Canvas</span>
+          <span>GitHub Pages</span>
+        </div>
+        <a class="project-link" href="https://jrnotjunior.github.io/Jorel-Jr-Somoza---Resume/" target="_blank" rel="noopener">VIEW PORTFOLIO ↗</a>
+      </article>
+    </div>
   </section>
 
   <section id="certifications" class="panel">
     <h2>Certifications</h2>
-    <div class="empty-state"><strong>CCNA — in progress</strong>Currently completing CCNA training (Cisco Networking Fundamentals). This section will be updated with the official certification once the exam is passed.</div>
+    <div class="cert-card">
+      <h3>Cisco CCNA</h3>
+      <p>In progress — Cisco networking fundamentals and CCNA preparation.</p>
+    </div>
+    <div class="cert-card">
+      <h3>NC II — Computer Systems Servicing</h3>
+      <p>TESDA National Certificate II in Computer Systems Servicing.</p>
+    </div>
   </section>
 
   <section id="skills" class="panel">
     <h2>Skills</h2>
-    <div class="skill-row"><span class="skill-label">SD-WAN / NETWORKING</span><span class="skill-values"><span>Versa SD-WAN</span><span>Riverbed</span><span>Extreme Networks Access Points</span></span></div>
-    <div class="skill-row"><span class="skill-label">SECURITY / REMOTE ACCESS</span><span class="skill-values"><span>Ivanti VPN</span><span>F5 BIG-IP (Load Balancing)</span></span></div>
+    <div class="skill-row"><span class="skill-label">NETWORKING</span><span class="skill-values"><span>SD-WAN</span><span>Network Monitoring</span><span>Troubleshooting</span><span>Appliance Configuration</span><span>Network Onboarding</span></span></div>
+    <div class="skill-row"><span class="skill-label">NETWORK PLATFORMS</span><span class="skill-values"><span>Versa SD-WAN</span><span>Riverbed</span><span>Extreme Networks Access Points</span></span></div>
+    <div class="skill-row"><span class="skill-label">SECURITY / ACCESS</span><span class="skill-values"><span>Ivanti VPN</span><span>F5 BIG-IP (Load Balancing)</span></span></div>
     <div class="skill-row"><span class="skill-label">CLOUD</span><span class="skill-values"><span>Azure Cloud Networking</span></span></div>
-    <div class="skill-row"><span class="skill-label">MONITORING</span><span class="skill-values"><span>SolarWinds</span></span></div>
-    <div class="skill-row"><span class="skill-label">TICKETING / ITSM</span><span class="skill-values"><span>ServiceNow</span></span></div>
-    <div class="skill-row"><span class="skill-label">CORE COMPETENCIES</span><span class="skill-values"><span>Network Monitoring</span><span>Troubleshooting</span><span>Appliance Configuration &amp; Onboarding</span><span>Incident Management</span></span></div>
+    <div class="skill-row"><span class="skill-label">MONITORING / ITSM</span><span class="skill-values"><span>SolarWinds</span><span>ServiceNow</span><span>Incident Management</span><span>SLA Management</span></span></div>
   </section>
 
   <section id="education" class="panel">
