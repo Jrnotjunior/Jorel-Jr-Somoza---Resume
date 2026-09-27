@@ -295,8 +295,8 @@ if (initial) {
   if (match) match.click();
 }
 
-/* Sticky footer: keep the footer at the bottom of the viewport on short tabs,
-   while allowing it to move below the content on longer tabs. */
+/* Footer positioning: footer stays at the bottom for short tabs,
+   but remains below the content when a tab is taller than the viewport. */
 (() => {
   const style = document.createElement("style");
   style.textContent = `
@@ -314,8 +314,11 @@ if (initial) {
     body > .wrap > .panel.active {
       flex: 1 0 auto;
     }
+    body > .wrap > footer {
+      margin-top: auto !important;
+    }
     body > footer {
-      margin-top: auto;
+      margin-top: auto !important;
     }
   `;
   document.head.appendChild(style);
