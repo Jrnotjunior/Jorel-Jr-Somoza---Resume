@@ -295,8 +295,8 @@ if (initial) {
   if (match) match.click();
 }
 
-/* Footer positioning: footer stays at the bottom for short tabs,
-   but remains below the content when a tab is taller than the viewport. */
+/* Footer positioning: keep short tabs at the viewport bottom,
+   while keeping long tabs naturally scrollable. */
 (() => {
   const style = document.createElement("style");
   style.textContent = `
@@ -316,9 +316,13 @@ if (initial) {
     }
     body > .wrap > footer {
       margin-top: auto !important;
+      padding: 20px 0 10px !important;
+      min-height: 52px;
     }
     body > footer {
       margin-top: auto !important;
+      padding: 20px 0 10px !important;
+      min-height: 52px;
     }
   `;
   document.head.appendChild(style);
