@@ -1,30 +1,113 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
   <defs>
-    <filter id="glow"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <linearGradient id="line" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#38bdf8" stop-opacity=".08"/><stop offset=".5" stop-color="#38bdf8" stop-opacity=".34"/><stop offset="1" stop-color="#38bdf8" stop-opacity=".08"/></linearGradient>
+    <radialGradient id="bg" cx="50%" cy="50%" r="75%">
+      <stop offset="0" stop-color="#102b48" stop-opacity=".78"/>
+      <stop offset=".55" stop-color="#071522" stop-opacity=".38"/>
+      <stop offset="1" stop-color="#030912" stop-opacity=".92"/>
+    </radialGradient>
+    <linearGradient id="wire" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#38bdf8" stop-opacity=".06"/>
+      <stop offset=".5" stop-color="#38bdf8" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#4ade80" stop-opacity=".08"/>
+    </linearGradient>
+    <linearGradient id="packet" x1="0" x2="1">
+      <stop stop-color="#38bdf8" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#7dd3fc"/>
+      <stop offset="1" stop-color="#4ade80" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
   </defs>
-  <g fill="none" stroke="url(#line)" stroke-width="1">
-    <path d="M40 180 L280 80 L520 220 L760 120 L1030 250 L1300 90 L1570 210"/>
-    <path d="M0 520 L210 390 L470 540 L720 410 L980 570 L1230 420 L1600 600"/>
-    <path d="M180 820 L390 650 L650 760 L900 640 L1170 790 L1450 650"/>
-    <path d="M280 80 L210 390 L390 650"/>
-    <path d="M520 220 L470 540 L650 760"/>
-    <path d="M760 120 L720 410 L900 640"/>
-    <path d="M1030 250 L980 570 L1170 790"/>
-    <path d="M1300 90 L1230 420 L1450 650"/>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+
+  <!-- subtle circuit grid -->
+  <g stroke="#38bdf8" stroke-opacity=".045" stroke-width="1">
+    <path d="M0 150H1600M0 300H1600M0 450H1600M0 600H1600M0 750H1600"/>
+    <path d="M160 0V900M320 0V900M480 0V900M640 0V900M800 0V900M960 0V900M1120 0V900M1280 0V900M1440 0V900"/>
   </g>
+
+  <!-- network topology -->
+  <g fill="none" stroke="url(#wire)" stroke-width="1.5">
+    <path d="M800 450 L800 145 L430 80 L120 230"/>
+    <path d="M800 450 L1050 155 L1390 120 L1510 300"/>
+    <path d="M800 450 L1190 450 L1480 590"/>
+    <path d="M800 450 L1030 720 L1370 810 L1550 700"/>
+    <path d="M800 450 L650 720 L330 820 L90 680"/>
+    <path d="M800 450 L470 470 L120 560 L50 400"/>
+    <path d="M800 450 L560 220 L300 330 L110 180"/>
+    <path d="M800 450 L800 780 L560 850"/>
+    <path d="M800 450 L930 300 L1120 300 L1320 410"/>
+    <path d="M800 450 L670 360 L420 390 L250 520"/>
+  </g>
+
+  <!-- secondary links -->
+  <g fill="none" stroke="#38bdf8" stroke-opacity=".12" stroke-width="1">
+    <path d="M430 80L300 330"/><path d="M1390 120L1120 300"/>
+    <path d="M1190 450L1320 410"/><path d="M1370 810L1480 590"/>
+    <path d="M330 820L250 520"/><path d="M560 850L650 720"/>
+  </g>
+
+  <!-- central NOC/router -->
+  <g transform="translate(800 450)" filter="url(#glow)">
+    <circle r="74" fill="#38bdf8" opacity=".035">
+      <animate attributeName="r" values="64;94;64" dur="3.8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values=".08;0;.08" dur="3.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="50" fill="#071522" stroke="#38bdf8" stroke-opacity=".7"/>
+    <circle r="40" fill="none" stroke="#4ade80" stroke-opacity=".3" stroke-dasharray="3 7">
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="12s" repeatCount="indefinite"/>
+    </circle>
+    <rect x="-22" y="-17" width="44" height="34" rx="5" fill="#0c2135" stroke="#7dd3fc" stroke-opacity=".8"/>
+    <path d="M-13-6H13M-13 0H13M-13 6H5" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="12" cy="6" r="2" fill="#4ade80"/>
+  </g>
+
+  <!-- endpoint nodes -->
   <g fill="#38bdf8" filter="url(#glow)">
-    <circle cx="280" cy="80" r="4"><animate attributeName="r" values="3;7;3" dur="2.8s" repeatCount="indefinite"/></circle>
-    <circle cx="520" cy="220" r="4"><animate attributeName="r" values="4;8;4" dur="3.4s" repeatCount="indefinite"/></circle>
-    <circle cx="760" cy="120" r="4"><animate attributeName="r" values="3;7;3" dur="2.5s" repeatCount="indefinite"/></circle>
-    <circle cx="1030" cy="250" r="4"><animate attributeName="r" values="4;8;4" dur="3.1s" repeatCount="indefinite"/></circle>
-    <circle cx="1300" cy="90" r="4"><animate attributeName="r" values="3;7;3" dur="2.9s" repeatCount="indefinite"/></circle>
-    <circle cx="720" cy="410" r="5"><animate attributeName="r" values="4;9;4" dur="3s" repeatCount="indefinite"/></circle>
-    <circle cx="980" cy="570" r="5"><animate attributeName="r" values="4;9;4" dur="3.7s" repeatCount="indefinite"/></circle>
+    <circle cx="120" cy="230" r="5"/><circle cx="430" cy="80" r="4"/>
+    <circle cx="1390" cy="120" r="5"/><circle cx="1510" cy="300" r="4"/>
+    <circle cx="1480" cy="590" r="5"/><circle cx="1550" cy="700" r="4"/>
+    <circle cx="1370" cy="810" r="5"/><circle cx="330" cy="820" r="5"/>
+    <circle cx="90" cy="680" r="4"/><circle cx="50" cy="400" r="5"/>
+    <circle cx="110" cy="180" r="4"/><circle cx="560" cy="850" r="5"/>
   </g>
-  <g fill="#7dd3fc">
-    <circle r="3"><animateMotion dur="5s" repeatCount="indefinite" path="M40 180 L280 80 L520 220 L760 120 L1030 250 L1300 90 L1570 210"/></circle>
-    <circle r="3"><animateMotion dur="6.5s" repeatCount="indefinite" path="M0 520 L210 390 L470 540 L720 410 L980 570 L1230 420 L1600 600"/></circle>
-    <circle r="3"><animateMotion dur="7s" repeatCount="indefinite" path="M180 820 L390 650 L650 760 L900 640 L1170 790 L1450 650"/></circle>
+
+  <!-- pulsing endpoint rings -->
+  <g fill="none" stroke="#38bdf8" stroke-opacity=".45">
+    <circle cx="120" cy="230" r="12"><animate attributeName="r" values="8;28;8" dur="4s" repeatCount="indefinite"/><animate attributeName="opacity" values=".55;0;.55" dur="4s" repeatCount="indefinite"/></circle>
+    <circle cx="1390" cy="120" r="12"><animate attributeName="r" values="8;28;8" dur="4.8s" repeatCount="indefinite"/><animate attributeName="opacity" values=".55;0;.55" dur="4.8s" repeatCount="indefinite"/></circle>
+    <circle cx="1370" cy="810" r="12"><animate attributeName="r" values="8;28;8" dur="4.3s" repeatCount="indefinite"/><animate attributeName="opacity" values=".55;0;.55" dur="4.3s" repeatCount="indefinite"/></circle>
+    <circle cx="330" cy="820" r="12"><animate attributeName="r" values="8;28;8" dur="5s" repeatCount="indefinite"/><animate attributeName="opacity" values=".55;0;.55" dur="5s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <!-- moving data packets -->
+  <g fill="#7dd3fc" filter="url(#glow)">
+    <circle r="4"><animateMotion dur="3.8s" repeatCount="indefinite" path="M120 230 L430 80 L800 145 L800 450"/></circle>
+    <circle r="4"><animateMotion dur="4.6s" repeatCount="indefinite" path="M1510 300 L1390 120 L1050 155 L800 450" begin=".8s"/></circle>
+    <circle r="4"><animateMotion dur="4.2s" repeatCount="indefinite" path="M90 680 L330 820 L650 720 L800 450" begin="1.4s"/></circle>
+    <circle r="4"><animateMotion dur="5.1s" repeatCount="indefinite" path="M1550 700 L1370 810 L1030 720 L800 450" begin="2.1s"/></circle>
+    <circle r="3"><animateMotion dur="3.4s" repeatCount="indefinite" path="M800 450 L930 300 L1120 300 L1320 410" begin=".4s"/></circle>
+    <circle r="3"><animateMotion dur="4.1s" repeatCount="indefinite" path="M800 450 L670 360 L420 390 L250 520" begin="1.8s"/></circle>
+  </g>
+
+  <!-- scanning pulse -->
+  <circle cx="800" cy="450" r="150" fill="none" stroke="#38bdf8" stroke-width="1" opacity="0">
+    <animate attributeName="r" values="70;500" dur="6s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values=".28;0" dur="6s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- foreground digital dust -->
+  <g fill="#7dd3fc" opacity=".5">
+    <circle cx="210" cy="120" r="1.5"><animate attributeName="opacity" values=".2;1;.2" dur="2.2s" repeatCount="indefinite"/></circle>
+    <circle cx="680" cy="110" r="1.5"><animate attributeName="opacity" values=".2;1;.2" dur="2.9s" repeatCount="indefinite"/></circle>
+    <circle cx="1160" cy="180" r="1.5"><animate attributeName="opacity" values=".2;1;.2" dur="2.5s" repeatCount="indefinite"/></circle>
+    <circle cx="1420" cy="480" r="1.5"><animate attributeName="opacity" values=".2;1;.2" dur="3.1s" repeatCount="indefinite"/></circle>
+    <circle cx="500" cy="610" r="1.5"><animate attributeName="opacity" values=".2;1;.2" dur="2.7s" repeatCount="indefinite"/></circle>
   </g>
 </svg>
