@@ -58,7 +58,6 @@
 
     nodes = [];
 
-    // Seed nodes in a loose grid, then jitter them for a natural topology.
     const cols = mobile ? 4 : Math.max(5, Math.round(Math.sqrt(count * width / height)));
     const rows = Math.ceil(count / cols);
     const xStep = width / (cols + 1);
@@ -158,7 +157,6 @@
 
     ctx.clearRect(0, 0, width, height);
 
-    // Very slow node drift.
     for (const node of nodes) {
       node.x = node.baseX + Math.sin(time * 0.00022 * node.drift + node.phase) * 5;
       node.y = node.baseY + Math.cos(time * 0.00018 * node.drift + node.phase) * 4;
@@ -296,3 +294,29 @@ if (initial) {
   const match = document.querySelector('nav.tabs a[data-target="' + initial + '"]');
   if (match) match.click();
 }
+
+/* Sticky footer: keep the footer at the bottom of the viewport on short tabs,
+   while allowing it to move below the content on longer tabs. */
+(() => {
+  const style = document.createElement("style");
+  style.textContent = `
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    body > .wrap {
+      width: 100%;
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+    body > .wrap > .panel.active {
+      flex: 1 0 auto;
+    }
+    body > footer {
+      margin-top: auto;
+    }
+  `;
+  document.head.appendChild(style);
+})();
