@@ -295,6 +295,22 @@ if (initial) {
   if (match) match.click();
 }
 
+/* Add LinkedIn profile alongside the existing GitHub action. */
+(() => {
+  const actions = document.querySelector(".hero-actions");
+  if (!actions || actions.querySelector("[data-linkedin]") ) return;
+
+  const link = document.createElement("a");
+  link.className = "hero-action";
+  link.href = "https://www.linkedin.com/in/jorel-jr-somoza-a982463a8/";
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = "LINKEDIN ↗";
+  link.setAttribute("data-linkedin", "true");
+
+  actions.insertBefore(link, actions.lastElementChild);
+})();
+
 /* Footer positioning: keep short tabs at the viewport bottom,
    while keeping long tabs naturally scrollable. */
 (() => {
