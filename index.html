@@ -11,6 +11,28 @@
   <link rel="stylesheet" href="style.css">
   <style>
     .lightbox { position: fixed !important; inset: 0 !important; }
+    .network-art {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: #07101d url("network-background.svg") center / cover no-repeat;
+      opacity: 0.34;
+      animation: networkArtDrift 22s ease-in-out infinite alternate;
+    }
+    @keyframes networkArtDrift {
+      from { transform: scale(1); }
+      to { transform: scale(1.045); }
+    }
+    nav.tabs, .wrap { position: relative; z-index: 2; }
+    .network-canvas, .network-vignette { z-index: 1 !important; }
+    .lightbox { z-index: 100 !important; }
+    @media (max-width: 700px) {
+      .network-art { opacity: 0.20; animation-duration: 28s; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .network-art { animation: none; }
+    }
   </style>
 </head>
 <body>
